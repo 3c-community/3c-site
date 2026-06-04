@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3C 相談ナビ</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif;
+    background: #f7f6f3;
+    color: #1a1a1a;
+    padding: 10px;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+  .rule-bar {
+    background: #fff;
+    border: 0.5px solid #e0ddd6;
+    border-radius: 7px;
+    padding: 5px 10px;
+    font-size: 10px;
+    color: #666;
+    text-align: center;
+    margin-bottom: 12px;
+    line-height: 1.4;
+  }
+  .rule-bar strong { color: #1a1a1a; font-weight: 600; }
+  .section-label {
+    font-size: 9px;
+    font-weight: 600;
+    color: #999;
+    letter-spacing: 0.06em;
+    margin-bottom: 8px;
+  }
+  .card {
+    background: #fff;
+    border: 0.5px solid #e0ddd6;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    overflow: hidden;
+    border-left-width: 4px;
+    border-left-style: solid;
+  }
+  .card-post { border-left-color: #CC0000; }
+  .card-bukai { border-left-color: #534AB7; }
+  .card-sos { border-left-color: #E8651A; }
+  .card-direct { border-left-color: #B8860B; }
+
+  .card-head {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 8px 10px 6px;
+  }
+  .badge {
+    font-size: 9px;
+    font-weight: 600;
+    padding: 2px 7px;
+    border-radius: 20px;
+    white-space: nowrap;
+  }
+  .teal { background: #E1F5EE; color: #0F6E56; }
+  .purple { background: #EEEDFE; color: #534AB7; }
+  .coral { background: #FAECE7; color: #993C1D; }
+  .amber { background: #FAEEDA; color: #854F0B; }
+  .card-title { font-size: 13px; font-weight: 600; color: #1a1a1a; }
+  .card-body { padding: 0 10px 10px; }
+  .level-row {
+    display: flex;
+    border: 0.5px solid #e0ddd6;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-bottom: 7px;
+  }
+  .level-cell { flex: 1; padding: 4px 3px; text-align: center; }
+  .level-cell + .level-cell { border-left: 0.5px solid #e0ddd6; }
+  .level-label { font-size: 8px; color: #aaa; margin-bottom: 1px; }
+  .level-val { font-size: 10px; font-weight: 600; color: #1a1a1a; }
+  .level-val-sm { font-size: 8px; font-weight: 600; color: #1a1a1a; line-height: 1.3; }
+  .card-desc {
+    font-size: 10px;
+    color: #555;
+    line-height: 1.65;
+    margin-bottom: 7px;
+  }
+  .tags { display: flex; flex-wrap: wrap; gap: 3px; margin-bottom: 7px; }
+  .tag {
+    font-size: 9px;
+    color: #666;
+    background: #f2f0eb;
+    border-radius: 3px;
+    padding: 1px 6px;
+  }
+  .btn-post {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    background: #CC0000;
+    color: #fff;
+    border-radius: 7px;
+    padding: 9px;
+    text-decoration: none;
+    width: 100%;
+  }
+  .post-icon { font-size: 16px; }
+  .post-label { display: flex; flex-direction: column; align-items: flex-start; line-height: 1.2; }
+  .post-main { font-size: 12px; font-weight: 600; }
+  .post-sub { font-size: 9px; opacity: 0.85; }
+  .bukai-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 5px;
+  }
+  .bukai-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    padding: 8px 4px;
+    background: #EEEDFE;
+    border-radius: 7px;
+    border: 0.5px solid #AFA9EC;
+    text-decoration: none;
+    cursor: pointer;
+    height: 64px;
+  }
+  .bukai-btn:active { opacity: 0.75; }
+  .bukai-icon { font-size: 18px; }
+  .bukai-name { font-size: 9px; font-weight: 600; color: #3C3489; text-align: center; line-height: 1.2; }
+  .bukai-coming {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    padding: 8px 4px;
+    background: #f7f6f3;
+    border-radius: 7px;
+    border: 0.5px dashed #ccc;
+    height: 64px;
+  }
+  .bukai-coming-name { font-size: 9px; color: #aaa; text-align: center; line-height: 1.2; }
+  .btn-line {
+    display: block;
+    text-align: center;
+    background: #06C755;
+    color: #fff;
+    border-radius: 7px;
+    padding: 9px;
+    font-size: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    width: 100%;
+  }
+</style>
+</head>
+<body>
+
+<div class="rule-bar">
+  <strong>相談者は実名。お客様情報は伏せる。</strong><br>どの窓口でも、このルールを守れば安心して相談できます
+</div>
+
+<div class="section-label">相談の窓口</div>
+
+<div class="card card-post">
+  <div class="card-head">
+    <span class="badge teal">気軽に・匿名OK</span>
+    <span class="card-title">📮 おハガキ</span>
+  </div>
+  <div class="card-body">
+    <div class="level-row">
+      <div class="level-cell"><div class="level-label">緊急度</div><div class="level-val">低</div></div>
+      <div class="level-cell"><div class="level-label">重要度</div><div class="level-val">中</div></div>
+      <div class="level-cell"><div class="level-label">宛先</div><div class="level-val">全体</div></div>
+    </div>
+    <div class="card-desc">匿名OK。ラジオネームでどうぞ。悩み・話したいこと・感謝…なんでも。あなたの声から次のラボのテーマが生まれ、新しい企画が動き出すことも。</div>
+    <a class="btn-post" href="https://docs.google.com/forms/d/e/1FAIpQLSe_gsyyh0AH9r66koMWGT-fTeKEyaE-VjCejFd-0OAcrTZitw/viewform" target="_blank">
+      <span class="post-icon">📮</span>
+      <span class="post-label">
+        <span class="post-main">おハガキを投稿する</span>
+        <span class="post-sub">Googleフォームが開きます</span>
+      </span>
+    </a>
+  </div>
+</div>
+
+<div class="card card-bukai">
+  <div class="card-head">
+    <span class="badge purple">部会に直接相談したいとき</span>
+    <span class="card-title">💬 各部会LINE</span>
+  </div>
+  <div class="card-body">
+    <div class="level-row">
+      <div class="level-cell"><div class="level-label">緊急度</div><div class="level-val">中〜高</div></div>
+      <div class="level-cell"><div class="level-label">重要度</div><div class="level-val">高</div></div>
+      <div class="level-cell"><div class="level-label">宛先</div><div class="level-val">部会全員</div></div>
+    </div>
+    <div class="card-desc">同じテーマの仲間へ。実名で。具体的なほど具体的な答えが返ってきます。お客様情報は伏せてOK。</div>
+    <div class="bukai-grid">
+      <a class="bukai-btn" href="https://line.me/ti/g/raz3y8Njw2" target="_blank">
+        <span class="bukai-icon">🏢</span>
+        <span class="bukai-name">法人開拓部会</span>
+      </a>
+      <a class="bukai-btn" href="https://line.me/ti/g/YkkW8Ax4mV" target="_blank">
+        <span class="bukai-icon">🎗</span>
+        <span class="bukai-name">がん保険部会</span>
+      </a>
+      <a class="bukai-btn" href="https://line.me/ti/g/SMwvZQSYqz" target="_blank">
+        <span class="bukai-icon">🛡</span>
+        <span class="bukai-name">損保部会</span>
+      </a>
+      <a class="bukai-btn" href="https://line.me/ti/g/SCT-MyDn57" target="_blank">
+        <span class="bukai-icon">🌸</span>
+        <span class="bukai-name">女性部会</span>
+      </a>
+      <a class="bukai-btn" href="https://line.me/ti/g/MyJL7d2FD3" target="_blank">
+        <span class="bukai-icon">🔒</span>
+        <span class="bukai-name">サイバー保険部会</span>
+      </a>
+      <div class="bukai-coming">
+        <span class="bukai-icon">📖</span>
+        <span class="bukai-coming-name">秀一の寺子屋<br>近日公開</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card card-sos">
+  <div class="card-head">
+    <span class="badge coral">迷ったらここへ</span>
+    <span class="card-title">🆘 3C-SOS</span>
+  </div>
+  <div class="card-body">
+    <div class="level-row">
+      <div class="level-cell"><div class="level-label">緊急度</div><div class="level-val">高</div></div>
+      <div class="level-cell"><div class="level-label">重要度</div><div class="level-val">高</div></div>
+      <div class="level-cell"><div class="level-label">宛先</div><div class="level-val-sm">河原一友<br>（ジョージ）</div></div>
+    </div>
+    <div class="card-desc">「相談していいのかな」「どの部会かわからない」「まだ怖い」——そのまま送ってください。適切な人・部会にお繋ぎします。</div>
+    <div class="tags"><span class="tag">実名</span><span class="tag">内容と背景</span><span class="tag">資料があれば添付</span></div>
+    <a class="btn-line" href="https://line.me/ti/p/stN1FkQH6Z" target="_blank">河原一友（ジョージ）にLINEする</a>
+  </div>
+</div>
+
+<div class="card card-direct">
+  <div class="card-head">
+    <span class="badge amber">最速</span>
+    <span class="card-title">📞 直接相談</span>
+  </div>
+  <div class="card-body">
+    <div class="level-row">
+      <div class="level-cell"><div class="level-label">緊急度</div><div class="level-val">最高</div></div>
+      <div class="level-cell"><div class="level-label">重要度</div><div class="level-val">最高</div></div>
+      <div class="level-cell"><div class="level-label">宛先</div><div class="level-val">その人へ</div></div>
+    </div>
+    <div class="card-desc">お互いの顔・人となり・得意分野を知っている仲間へ。気兼ねなく直接連絡してみてください。</div>
+    <div class="tags"><span class="tag">3Cで築いた信頼関係</span><span class="tag">一番早い</span></div>
+  </div>
+</div>
+
+</body>
+</html>
