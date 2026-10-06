@@ -376,6 +376,11 @@ a.lnb{display:block;text-align:center;text-decoration:none;font-weight:900;font-
 .wq{margin-top:14px;font-size:12px;color:#ffd94a;font-weight:900}.wqt{font-size:16px;line-height:1.6}.wf2{margin-top:14px;font-size:12.5px;opacity:.85;line-height:1.6}
 .pq button.q.fog{background:linear-gradient(180deg,rgba(200,206,218,.25),rgba(200,206,218,.08))}.pq button.q.fog b:before{content:"☁ "}
 .wf select{font:inherit;font-size:15px;border:2px solid var(--line);border-radius:12px;padding:10px;background:var(--card);color:var(--ink);width:100%}
+.f3{margin-top:14px;border:2.5px solid #e2553f;border-radius:20px;padding:14px 16px;background:var(--card)}.f3k{font-weight:900;font-size:15px;color:#e2553f}.f3s{font-size:13px;color:var(--mute);margin:2px 0 8px}
+.f3r{display:flex;gap:10px;align-items:center;padding:8px 0;border-top:1px dashed var(--line)}.f3i{font-size:22px}.f3r b{display:block;font-size:15px}.f3r small{display:block;font-size:12px;color:var(--mute)}.f3r.ok b{text-decoration:line-through;color:var(--mute)}
+.f3 button{margin-top:10px;width:100%;font:inherit;font-weight:900;font-size:16px;border:0;border-radius:14px;padding:12px;background:#e2553f;color:#fff;cursor:pointer}.f3d{margin-top:8px;font-weight:900;color:#3f9a72;text-align:center}
+.ppage.orig{position:relative;width:794px;max-width:none;border-radius:4px}.ppage .wm{position:absolute;inset:0;pointer-events:none;overflow:hidden;color:rgba(34,48,74,.07);font-size:22px;font-weight:900;line-height:3;transform:rotate(-18deg) scale(1.4);word-break:break-all}
+.origb{flex:none;margin-left:auto;font:inherit;font-weight:900;font-size:13px;background:rgba(255,255,255,.14);color:#fff;border:0;border-radius:12px;padding:8px 10px;cursor:pointer;white-space:nowrap}#origb.on{background:#ffd94a;color:#1f2433}
 details.chk summary{font-weight:900;font-size:16px;cursor:pointer;padding:4px 0}
 .rdock{position:fixed;left:0;right:0;bottom:0;display:grid;grid-template-columns:1fr 1fr 1.4fr;gap:8px;padding:10px 12px calc(10px + env(safe-area-inset-bottom,0px));background:var(--navy);z-index:3}
 .rdock button{font:inherit;font-weight:900;font-size:17px;border:0;border-radius:12px;padding:12px 6px;background:rgba(255,255,255,.12);color:#fff;cursor:pointer}
@@ -440,7 +445,7 @@ details.chk summary{font-weight:900;font-size:16px;cursor:pointer;padding:4px 0}
 <nav class="dock" id="dock">
 <div class="sbar"><input type="search" id="kw" placeholder="🔍 キーワード（NISA、がん、社長…）" enterkeyhint="search"></div>
 <div class="tabsb"><button data-v="home">🏠<small>ホーム</small></button><button data-v="now">⏱<small>5分後</small></button><button data-v="eve">📖<small>予習</small></button><button data-v="learn">📚<small>学ぶ</small></button><button data-v="back">✎<small>書く・相談</small></button></div></nav>
-<div id="reader" class="hide"><div class="rbar"><div class="in"><div class="l1"><button class="back" id="back">← 戻る</button><div class="rt" id="rt"></div><button class="spk" id="spk" aria-label="音声で聞く">🔊</button></div><div class="crumb" id="crumb"></div><div class="vp hide" id="vp"><div class="vrow"><button id="v-read">▶ 読み上げ<small>無料・全文</small></button><button id="v-ai">🤖 1分解説<small>AIがまとめる</small></button></div><div class="vrow2"><button id="v-rate">速さ 1.0倍</button><button id="v-stop">■ 止める</button></div><div class="vst" id="vst"></div></div></div></div><div class="rbody" id="rbody"></div><div class="rdock"><button id="back2">← 戻る</button><button id="prevp">↑ 前</button><button id="nextp" class="pri">次へ ↓</button></div></div>
+<div id="reader" class="hide"><div class="rbar"><div class="in"><div class="l1"><button class="back" id="back">← 戻る</button><div class="rt" id="rt"></div><button class="origb" id="origb" aria-label="原本で見る" title="原本のレイアウトで見る">📄 原本</button><button class="spk" id="spk" aria-label="音声で聞く">🔊</button></div><div class="crumb" id="crumb"></div><div class="vp hide" id="vp"><div class="vrow"><button id="v-read">▶ 読み上げ<small>無料・全文</small></button><button id="v-ai">🤖 1分解説<small>AIがまとめる</small></button></div><div class="vrow2"><button id="v-rate">速さ 1.0倍</button><button id="v-stop">■ 止める</button></div><div class="vst" id="vst"></div></div></div></div><div class="rbody" id="rbody"></div><div class="rdock"><button id="back2">← 戻る</button><button id="prevp">↑ 前</button><button id="nextp" class="pri">次へ ↓</button></div></div>
 
 <div id="ksheet" class="ovl hide"><div class="kbar"><button class="back" id="kback">← 戻る</button></div><div class="kbody" id="kbody"></div></div>
 <div id="exp" class="hide"><div class="pbar"><button id="xclose">✕</button><span id="xno"></span><span class="pnav"><button id="xback">← 戻る</button></span></div><div class="xstage" id="xst"></div></div>
@@ -511,6 +516,7 @@ function fitGrids(root){const w=root.host?root.host.clientWidth:600;
  root.querySelectorAll('*').forEach(e=>{const cs=getComputedStyle(e);
   if(cs.display.includes('grid')&&!e.classList.contains('b')){const cols=cs.gridTemplateColumns.split(' ').map(parseFloat).filter(x=>x>0);if(cols.length>1&&Math.min(...cols)<170)e.style.gridTemplateColumns='1fr'}
   if(cs.display.includes('flex')&&cs.flexDirection==='row'&&e.scrollWidth>e.clientWidth+2)e.style.flexWrap='wrap'})}
+let ORIG=false;const ORIGCSS=`*{-webkit-user-select:none;user-select:none}.page{margin:0!important}.curtain,.turn{display:none!important}:host{position:relative;display:block}.wm{position:absolute;inset:0;pointer-events:none;overflow:hidden;color:rgba(34,48,74,.08);font-size:22px;font-weight:900;line-height:3.2;transform:rotate(-18deg) scale(1.5);word-break:break-all;z-index:9}`;
 const OVR=`.page{width:auto!important;height:auto!important;min-height:0!important;padding:18px 16px 22px!important;overflow:visible!important;margin:0!important;page-break-after:auto!important;gap:12px!important;zoom:var(--z,1.15)}
 .page:before{display:none!important;content:none!important}.foot,.memo2,.turn,.curtain{display:none!important}
 .page *{max-width:100%;box-sizing:border-box}svg{max-width:100%;height:auto}table{display:block;overflow-x:auto}`;
@@ -520,10 +526,10 @@ function openJ(no){addRecent(no);stopV();const j=BY[no];curJ=j;$('vp').classList
   const cb=el('button',p.kind==='talk'?'t':'',name);cb.onclick=()=>document.getElementById('pg'+i).scrollIntoView({behavior:'smooth'});C.append(cb);
   const l=el('div','plab '+p.kind,name);l.id='pg'+i;B.append(l);
   const host=el('div','ppage');B.append(host);const sr=host.attachShadow({mode:'open'});
-  sr.innerHTML='<style>'+D.css[p.src].replace(/:root/g,':host')+'</style><style>'+OVR+'</style>'+p.html});
+  sr.innerHTML='<style>'+D.css[p.src].replace(/:root/g,':host')+'</style><style>'+(ORIG?ORIGCSS:OVR)+'</style>'+p.html;if(ORIG){host.classList.add('orig');host.style.zoom=Math.min(1,(Math.min(innerWidth,860)-24)/794);const wm=el('div','wm');wm.textContent=('3C会員限定　'+(lsg('fc_name','')||'')+'　').repeat(40);sr.append(wm);host.oncontextmenu=e=>e.preventDefault()}});
  const rb=el('div','relbox');rb.append(el('h2',null,'あわせて読む'));for(const n of j.rel)rb.append(row(n,BY[n].cat));B.append(rb);
  $('reader').classList.remove('hide');$('reader').scrollTop=0;document.body.style.overflow='hidden';
- requestAnimationFrame(()=>{const z=innerWidth<520?1.05:1.3;B.querySelectorAll('.ppage').forEach(h=>{h.style.setProperty('--z',z);fitGrids(h.shadowRoot)})});
+ if(!ORIG)requestAnimationFrame(()=>{const z=innerWidth<520?1.05:1.3;B.querySelectorAll('.ppage').forEach(h=>{h.style.setProperty('--z',z);fitGrids(h.shadowRoot)})});
  try{history.pushState({r:no},'')}catch(e){}}
 function closeR(){stopV();$('reader').classList.add('hide');document.body.style.overflow='';window.scrollTo(0,scrollY0)}
 $('back2').onclick=()=>$('back').click();
@@ -762,7 +768,7 @@ let DB_=null,USR=null,UID=null,CANW=null,ISOWN=false;
  if(ISOWN)ownerBadge();myStones()}catch(e){}})();
 const lsg=(k,d)=>{try{const v=localStorage.getItem(k);return v==null?d:JSON.parse(v)}catch(e){return d}};const lss=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
 async function myStones(){const n=lsg('fc_mine',[]).length;const b=$('sgb');if(b)b.textContent=n?'✎ あなたの一本を書く（これまで '+n+' 本）':'✎ あなたの一本を書く'}
-function lineText(x){return `【3C 日誌の一本】\n【つくり手】${x.name||'（未記入）'}\n【日誌への掲載】${x.pub||'（未選択）'}\n【種類】${x.kind}${x.waza?'／'+x.waza:''}${x.kata?'\n【継いだ型】'+x.kata:''}\n【どんなお客様】${x.who||'（未記入）'}\n【① 何があった】\n${x.a||''}\n【② 何て言った】\n${x.b||''}\n【③ どうなった】\n${x.c||''}`}
+function lineText(x){return `【3C 日誌の一本】${x.first?'【はじめての石】':''}\n【つくり手】${x.name||'（未記入）'}\n【日誌への掲載】${x.pub||'（未選択）'}\n【種類】${x.kind}${x.waza?'／'+x.waza:''}${x.kata?'\n【継いだ型】'+x.kata:''}\n【どんなお客様】${x.who||'（未記入）'}\n【① 何があった】\n${x.a||''}\n【② 何て言った】\n${x.b||''}\n【③ どうなった】\n${x.c||''}`}
 function openWrite(pre){pre=pre||{};const B=$('kbody');B.textContent='';
  const th=el('div','kthey','あなたの一本');th.append(el('div',null,'うまくいった日も、悔しかった夜も。3行でいい。あなたの一本が、いつか仲間の「その瞬間」に届きます。'));B.append(th);
  const F=el('div','wf');const fld=(lab,ph,v,big)=>{const l=el('label');l.append(el('span',null,lab));const i=el(big?'textarea':'input');i.placeholder=ph;i.value=v||'';if(big)i.rows=3;l.append(i);F.append(l);return i};
@@ -778,15 +784,16 @@ function openWrite(pre){pre=pre||{};const B=$('kbody');B.textContent='';
  const name=fld('お名前 または ラジオネーム','例：小野／ラジオネーム「月曜の朝」',lsg('fc_name',''));
  const ok=el('label','wok');const cb=el('input');cb.type='checkbox';ok.append(cb);ok.append(document.createTextNode('お客様のお名前・会社名など、特定できることは書いていません'));F.append(ok);
  B.append(F);const msg=el('div','wmsg');
- const get=()=>({kata:kata.value,pub:pub(),kind:kind(),waza:waza(),who:who.value.trim(),a:a.value.trim(),b:b.value.trim(),c:c.value.trim(),name:name.value.trim()});
+ const get=()=>({first:(pre.first||(!lsg('fc_mine',[]).length&&!lsg('fc_consult',[]).length))?1:0,kata:kata.value,pub:pub(),kind:kind(),waza:waza(),who:who.value.trim(),a:a.value.trim(),b:b.value.trim(),c:c.value.trim(),name:name.value.trim()});
  const check=x=>{if(!x.a&&!x.b&&!x.c){msg.textContent='①〜③のどれか1つだけでも書いてください。';return false}if(!cb.checked){msg.textContent='最後のチェック（お客様が特定できないこと）を確かめてください。';return false}lss('fc_name',x.name);lss('fc_pub',x.pub);return true};
- let SN=0;const keep=x=>{SN++;setTimeout(()=>{try{drawTower()}catch(e){}},50);const m=lsg('fc_mine',[]);m.unshift({...x,d:new Date().toLocaleDateString('ja-JP',{timeZone:'Asia/Tokyo'})});lss('fc_mine',m.slice(0,100));myStones()};
+ let SN=0;const keep=x=>{SN++;setTimeout(()=>{try{drawFirst()}catch(e){}},80);setTimeout(()=>{try{drawTower()}catch(e){}},50);const m=lsg('fc_mine',[]);m.unshift({...x,d:new Date().toLocaleDateString('ja-JP',{timeZone:'Asia/Tokyo'})});lss('fc_mine',m.slice(0,100));myStones()};
  const done=(how)=>{F.remove();send.remove();cp.remove();msg.textContent='';const n=Math.max(lsg('fc_mine',[]).length,SN);B.querySelectorAll('.note').forEach(x=>x.remove());const D_=el('div','wdone');D_.append(el('div','big','🪨'));D_.append(el('b',null,'あなたの石が、ひとつ置かれました'));D_.append(el('small',null,how+'　これで '+n+' 本目。'+(get().pub==='載せないで（事務局だけ）'?'事務局だけで読みます。':'日誌としてコンパスに載せることがあります（そのときは選んだ名前で）。')));B.append(D_);confetti();if(!$('v-back').classList.contains('hide'))writeView()};
  const bar=el('div','wbtn');const send=el('a','pri','📮 3C事務局に送る');send.target='_blank';send.rel='noopener';const cp=el('button',null,'📋 コピーしてLINEで送る');
  const FORM='https://docs.google.com/forms/d/e/1FAIpQLSe_gsyyh0AH9r66koMWGT-fTeKEyaE-VjCejFd-0OAcrTZitw/viewform';
  const upd=()=>{const x=get();send.href=FORM+'?usp=pp_url&entry.1020749976='+encodeURIComponent(x.name||'（名前なし）')+'&entry.1627821406='+encodeURIComponent(lineText(x))};
  F.addEventListener('input',upd);F.addEventListener('click',()=>setTimeout(upd,0));upd();
  send.onclick=e=>{upd();const x=get();if(!check(x)){e.preventDefault();return}keep(x);setTimeout(()=>done('フォームが開きます。いちばん下の「送信」を押したら、届きます。'),300)};
+ oneTap(send,()=>get().name,()=>{upd();return lineText(get())},()=>{const x=get();keep(x);done('3C事務局に届きました。');try{drawFirst()}catch(e){}},()=>check(get()));
  cp.onclick=async()=>{const x=get();if(!check(x))return;const t=lineText(x);let okc=false;try{await navigator.clipboard.writeText(t);okc=true}catch(e){}
   if(okc){keep(x);done('コピーしました。3CのLINEに貼り付けて送ってください。')}else{msg.textContent='コピーできなかったので、下の文を長押しで選んでコピーしてください。';const ta=el('textarea','wcopy');ta.value=t;ta.rows=8;B.append(ta);ta.focus();ta.select();keep(x)}};
  bar.append(send);bar.append(cp);B.append(msg);B.append(bar);
@@ -824,6 +831,7 @@ function openFeedback(){const B=$('kbody');B.textContent='';const where=(TITLES[
  const msg=el('div','wmsg');const bar=el('div','wbtn');const send=el('a','pri','🧱 このひと言を届ける');send.target='_blank';send.rel='noopener';
  const upd=()=>{send.href=FORM+'?usp=pp_url&entry.1020749976='+encodeURIComponent(name.value.trim()||'（名前なし）')+'&entry.1627821406='+encodeURIComponent(txt())};
  F.addEventListener('input',upd);F.addEventListener('click',()=>setTimeout(upd,0));upd();
+ oneTap(send,()=>name.value.trim(),()=>txt(),()=>{lss('fc_name',name.value.trim());lss('fc_voice',lsg('fc_voice',0)+1);drawTower();F.remove();bar.remove();msg.textContent='';const D_=el('div','wdone');D_.append(el('div','big','🧱'));D_.append(el('b',null,'ひと積み、ありがとうございます'));D_.append(el('small',null,'届きました。いただいた声をもとに、コンパスを少しずつ積み直していきます。'));B.append(D_)},()=>{if(!feel()&&!what.value.trim()&&!wish.value.trim()){msg.textContent='ひと言か、どれか1つだけでも入れてください。';return false}return true});
  send.onclick=e=>{upd();if(!feel()&&!what.value.trim()&&!wish.value.trim()){e.preventDefault();msg.textContent='ひと言か、どれか1つだけでも入れてください。';return}lss('fc_name',name.value.trim());lss('fc_voice',lsg('fc_voice',0)+1);drawTower();
   setTimeout(()=>{F.remove();bar.remove();msg.textContent='';const D_=el('div','wdone');D_.append(el('div','big','🧱'));D_.append(el('b',null,'ひと積み、ありがとうございます'));D_.append(el('small',null,'フォームが開きます。いちばん下の「送信」を押したら届きます。いただいた声をもとに、コンパスを少しずつ積み直していきます。'));B.append(D_)},300)};
  bar.append(send);B.append(msg);B.append(bar);$('ksheet').classList.remove('hide');$('ksheet').scrollTop=0}
@@ -833,8 +841,8 @@ $('fbb').onclick=openFeedback;
 const STATS_CSV='https://docs.google.com/spreadsheets/d/e/2PACX-1vTX2ovVr8o1r0hJkAQfjpM2OQpgyxugtYxvqe7c4krH2YXhrRNu-joGlZrrZR0Axxr1qSxvZem-yCGD/pub?gid=1114468392&single=true&output=csv';
 const DEFS={'オンゴーイング':['現在進行形の助言','現在進行形の助言。契約はゴールではなくスタート。お客様の人生が動き続けるかぎり、変化に気づき、備えを一緒に見直し続ける関わり方。']};// 回答シートの「集計」タブをCSVで公開したURL（total,month）。空なら日誌の数だけで数える
 const MILE=[[50,'礎石','土台ができました'],[100,'誕生の門','最初の門が開きました'],[200,'受難の門','失敗の話が、門になりました'],[365,'栄光の門','1日1つ分、積みました'],[500,'中央の塔','でも、まだ完成しません']];
-let STATS={extra:0,month:0};
-async function loadStats(){if(!STATS_CSV)return;try{const t=await (await fetch(STATS_CSV,{cache:'no-store'})).text();const r=t.trim().split(/\r?\n/).map(l=>l.split(','));const g=k=>{const x=r.find(l=>l[0].trim()===k);return x?parseInt(x[1])||0:0};STATS={extra:g('total'),month:g('month')};drawTower();drawExpl()}catch(e){}}
+let STATS={extra:0,month:0,first:0,good:{}};
+async function loadStats(){if(!STATS_CSV)return;try{const t=await (await fetch(STATS_CSV,{cache:'no-store'})).text();const r=t.trim().split(/\r?\n/).map(l=>l.split(','));const g=k=>{const x=r.find(l=>l[0].trim()===k);return x?parseInt(x[1])||0:0};const gd={};for(const l of r){const k=(l[0]||'').trim();if(k.startsWith('g:'))gd[k.slice(2)]=parseInt(l[1])||0}STATS={extra:g('total'),month:g('month'),first:g('first'),good:gd};drawFirst();drawTower();drawExpl()}catch(e){}}
 function myCount(){return lsg('fc_mine',[]).length+lsg('fc_voice',0)+lsg('fc_consult',[]).length}
 function drawTower(){const tot=J.length+STATS.extra;const f=.30+.70*Math.min(1,tot/500);const b=$('twb'),l=$('twl');if(!b)return;
  b.style.clipPath='inset('+((1-f)*100).toFixed(1)+'% 0 0 0)';l.style.top=((1-f)*100).toFixed(1)+'%';$('twt').textContent='いまここ　石 '+tot;
@@ -863,10 +871,10 @@ function drawZukCard(){const Z=$('zukc');if(!Z)return;Z.textContent='';const z=z
  const pr=el('div','zpr');pr.append(el('i'));pr.firstChild.style.width=(got/J.length*100)+'%';d.append(pr);b.onclick=openZukan;Z.append(b)}
 function openZukan(){const B=$('kbody');B.textContent='';const z=zuk();const got=J.filter(j=>z[j.no]).length;
  const th=el('div','kthey','日誌図鑑　'+got+' / '+J.length);th.append(el('div',null,'つくり手の現場の記録を、一枚ずつ集める。「？」のカードは、まだ読んでいない日誌です。'));B.append(th);
- const G=el('div','zgrid');for(const j of J){const lv=z[j.no]||0;const c=el('button','zc'+(lv>=2?' gold':lv?' got':''));c.append(el('span','zn',j.no));c.append(el('b',null,lv?j.title.replace(/^「|」$/g,''):'？'));c.append(el('small',null,lv?(j.author||''):j.cat));c.onclick=()=>{$('ksheet').classList.add('hide');openJ(j.no)};G.append(c)}
+ const G=el('div','zgrid');for(const j of J){const lv=z[j.no]||0;const c=el('button','zc'+(lv>=2?' gold':lv?' got':''));c.append(el('span','zn',j.no));c.append(el('b',null,lv?j.title.replace(/^「|」$/g,''):'？'));c.append(el('small',null,(lv?(j.author||''):j.cat)+(goodCount(j.no)?' 💡'+goodCount(j.no):'')));c.onclick=()=>{$('ksheet').classList.add('hide');openJ(j.no)};G.append(c)}
  B.append(G);B.append(el('div','note','カードはこの端末に集まります。日誌が増えると、図鑑の枠も増えていきます。'));$('ksheet').classList.remove('hide');$('ksheet').scrollTop=0}
 (function(){const _o=openJ;openJ=function(no){_o(no);zukMark(no,1);try{const rb=$('rbody').querySelector('.relbox');const x=reactBar(no);rb?rb.before(x):$('rbody').append(x)}catch(e){}try{const io=new IntersectionObserver(es=>{for(const e of es)if(e.isIntersecting){zukMark(no,2);io.disconnect()}},{root:$('reader')});const w=$('rbody').querySelector('.plab.why');if(w)io.observe(w)}catch(e){}}})();
-setTimeout(()=>{drawTower();drawExpl();drawZukCard();loadStats()},0);
+setTimeout(()=>{drawTower();drawExpl();drawZukCard();drawFirst();loadStats()},0);
 
 // ======== 型・継承・リアクション・相談・称号・あなたの今年 ========
 const KATA={"No.01": "小野の型・壱「半分正解クイズ」", "No.02": "小野の型・弐「もうかる相続税」", "No.03": "小野の型・参「6か月の株対決」", "No.04": "小野の型・肆「コーラ屋さんの村」", "No.05": "小野の型・伍「3,900円は戻る？」", "No.06": "小野の型・陸「NISAはオフサイド」", "No.07": "小野の型・漆「熱を出さない自信」", "No.08": "小野の型・捌「中学校の1組セット」", "No.09": "小野の型・玖「人生の先輩として」", "No.10": "河原の型・壱「合コンの割り算」", "No.11": "小野の型・拾「サインボール」", "No.12": "小野の型・拾壱「例話の解剖」", "No.13": "原木の型・壱「課税の繰延」", "No.14": "原木の型・弐「2問クイズ」", "No.15": "原木の型・参「返戻率よりキャッシュ」", "No.16": "小笠原の型・壱「値段は4つ」", "No.17": "小笠原の型・弐「1円も渡したくない」", "No.18": "小笠原の型・参「3つから5つへ」", "No.19": "小笠原の型・肆「紹介の入口」", "No.20": "公開相談の型・壱「3つの見立て」", "No.21": "田島の型・壱「って言われてみて」", "No.22": "田島の型・弐「お墓から聞く」", "No.23": "田島の型・参「住まいの掛け算」", "No.24": "川原の型・壱「治したいですか」", "No.25": "川原の型・弐「標準治療とは」", "No.26": "佐藤・瀨戸の型・壱「マイルストーン」", "No.27": "樋浦の型・壱「お手洗いのチラシ」", "No.28": "樋浦の型・弐「最初の2回は来ない」", "No.29": "樋浦の型・参「IFAという働き方」", "No.30": "河原の型・弐「事故のフローチャート」", "No.31": "河原の型・参「止まってたのに？」", "No.32": "河原の型・肆「直しますか？」"};
@@ -879,7 +887,7 @@ function myTitle(){const n=myCount();let t=TITLE[0],nx=null;for(let i=0;i<TITLE.
 function reacts(){return lsg('fc_react',{})}
 function setReact(no,k){const r=reacts();r[no]=r[no]||{};r[no][k]=(r[no][k]||0)+1;lss('fc_react',r)}
 function reactBar(no){const j=BY[no];const W=el('div','rx');W.append(el('div','rxh','この日誌、どうでしたか？'));const R=el('div','rxb');const r=reacts()[no]||{};
- const b1=el('button',r.h?'on':'','💡 はっ'+(r.h?' ✓':''));b1.onclick=()=>{if(!(reacts()[no]||{}).h){setReact(no,'h');b1.classList.add('on');b1.textContent='💡 はっ ✓';toast('💡 はっ、を残しました。周年に、つくり手へまとめて届きます')}};
+ const gc=goodCount(no);const b1=el('button',r.h?'on':'','💡 はっ'+(r.h?' ✓':'')+(gc?' '+gc:''));b1.onclick=()=>{if(!(reacts()[no]||{}).h){setReact(no,'h');b1.classList.add('on');b1.textContent='💡 はっ ✓ '+(gc+1);silentSend(lsg('fc_name',''),'【good】'+no+' 💡');toast(IS_PAGES?'💡 つくり手に「はっ」が届きました':'💡 はっ、を残しました');try{drawFirst()}catch(e){}}};
  const b2=el('button',null,'🛠 使った');b2.onclick=()=>{setReact(no,'u');$('reader').classList.add('hide');document.body.style.overflow='';openWrite({kata:KATA[no]||'',kind:'うまくいった',a:''})};
  const b3=el('button',null,'🙏 ありがとう');b3.onclick=()=>openThanks(no);
  R.append(b1);R.append(b2);R.append(b3);W.append(R);if(KATA[no])W.append(el('div','rxk','この話し方は「'+KATA[no]+'」。使ったら、あなたは継承者です（仮の型名・つくり手と相談中）'));return W}
@@ -889,6 +897,7 @@ function openThanks(no){const j=BY[no];$('reader').classList.add('hide');documen
  const l2=el('label');l2.append(el('span',null,'お名前（ラジオネームも可）'));const nm=el('input');nm.value=lsg('fc_name','');l2.append(nm);F.append(l2);B.append(F);
  const a=el('a','pri','🙏 ありがとうを届ける');a.target='_blank';a.rel='noopener';const bar=el('div','wbtn');bar.append(a);B.append(bar);
  const upd=()=>{a.href=formHref(nm.value.trim(),`【3C ありがとう】\n【宛先】${j.author||''}（${j.no} ${j.title}）\n【ひと言】\n${t.value.trim()}`)};F.addEventListener('input',upd);upd();
+ oneTap(a,()=>nm.value.trim(),()=>{upd();return decodeURIComponent(a.href.split('entry.1627821406=')[1])},()=>{lss('fc_name',nm.value.trim());lss('fc_thx',lsg('fc_thx',0)+1);setReact(no,'t');F.remove();bar.remove();const D_=el('div','wdone');D_.append(el('div','big','🙏'));D_.append(el('b',null,'ありがとうが、届きました'));D_.append(el('small',null,'3Cの周年に、つくり手のもとへ「ありがとうの束」として渡ります。'));B.append(D_);confetti();try{drawFirst()}catch(e){}},()=>{if(!t.value.trim()){t.focus();return false}return true});
  a.onclick=e=>{if(!t.value.trim()){e.preventDefault();t.focus();return}lss('fc_name',nm.value.trim());const s=lsg('fc_thx',0);lss('fc_thx',s+1);setReact(no,'t');setTimeout(()=>{F.remove();bar.remove();const D_=el('div','wdone');D_.append(el('div','big','🙏'));D_.append(el('b',null,'ありがとうが、旅立ちました'));D_.append(el('small',null,'フォームの「送信」で届きます。3Cの周年に、つくり手のもとへ「ありがとうの束」として渡ります。'));B.append(D_)},300)};
  $('ksheet').classList.remove('hide');$('ksheet').scrollTop=0}
 // --- 相談 ---
@@ -934,6 +943,22 @@ function openWrapped(){const B=$('kbody');B.textContent='';const t=myTitle();con
  const G=el('div','wg');for(const [ic,lb,v] of st){const c=el('div');c.append(el('span',null,ic));c.append(el('b',null,String(v)));c.append(el('small',null,lb));G.append(c)}W.append(G);
  if(mine.length){W.append(el('div','wq','あなたのいちばん最近の一本'));W.append(el('div','wqt','「'+(mine[0].a||mine[0].b||mine[0].c||'').slice(0,60)+'」'))}
  W.append(el('div','wf2','3Cの周年には、仲間からあなたへの「はっ」と「ありがとう」も、ここに届きます。'));B.append(W);$('ksheet').classList.remove('hide');$('ksheet').scrollTop=0}
+
+// ======== ワンタップ送信・good・はじめの3歩・原本 ========
+const IS_PAGES=/github\.io$/.test(location.hostname);
+async function silentSend(name,text){if(!IS_PAGES)return false;try{const fd=new URLSearchParams();fd.append('entry.1020749976',name||'（名前なし）');fd.append('entry.1627821406',text);await fetch(FORMU.replace('viewform','formResponse'),{method:'POST',mode:'no-cors',body:fd});return true}catch(e){return false}}
+function oneTap(a,getName,getText,onDone,check){a.addEventListener('click',async e=>{if(!IS_PAGES)return;e.preventDefault();e.stopImmediatePropagation();if(check&&!check())return;a.style.pointerEvents='none';a.textContent='届けています…';const ok=await silentSend(getName(),getText());if(ok)onDone();else{a.style.pointerEvents='';a.textContent='もう一度届ける（フォームを開く）';window.open(a.href,'_blank')}},true)}
+function goodCount(no){return (STATS.good||{})[no]||0}
+$('origb').onclick=()=>{ORIG=!ORIG;$('origb').classList.toggle('on',ORIG);toast(ORIG?'📄 原本のレイアウトで表示します（会員限定・持ち出し禁止）':'📱 スマホで読みやすい表示に戻しました');if(curJ){const y=$('reader').scrollTop;openJ(curJ.no);$('reader').scrollTop=y}};
+// はじめの3歩
+function firstSteps(){const r=reacts();const gave=Object.values(r).some(x=>x.h);const wrote=lsg('fc_mine',[]).length+lsg('fc_consult',[]).length>0;const thx=lsg('fc_thx',0)>0;return [['💡','どれか1本の日誌に「💡 はっ」を押す','読んで、ボタンを押すだけ',gave],['✎','今月のお題に、1行で答える','あなたの「はじめての石」になります',wrote],['🙏','仲間に「ありがとう」を1回届ける','日誌の最後のボタンから',thx]]}
+function drawFirst(){let X=$('first3');if(!X){X=el('div');X.id='first3';const u=document.querySelector('#v-home .ude');(u||$('expl')).before(X)}X.textContent='';const st=firstSteps();const done=st.filter(s=>s[3]).length;if(done===3&&lsg('fc_first_done',0))return;
+ const W=el('div','f3');W.append(el('div','f3k','🪂 はじめの3歩　─　一度跳べば、あとは楽しい'));const n=STATS.first||0;
+ W.append(el('div','f3s',n?'つくり手 '+n+' 人が、もう最初の石を置きました':'最初の石を置く、一人目になりませんか'));
+ for(const [ic,t,s,ok] of st){const r=el('div','f3r'+(ok?' ok':''));r.append(el('span','f3i',ok?'✅':ic));const d=el('div');d.append(el('b',null,t));d.append(el('small',null,s));r.append(d);W.append(r)}
+ if(done===3){W.append(el('div','f3d','🎉 バンジー成功！ あなたはもう、つくり手です'));lss('fc_first_done',1);confetti()}
+ else{const b=el('button',null,!st[0][3]?'💡 まず1本、日誌を読んでみる':!st[1][3]?'✎ お題に1行で答える':'🙏 ありがとうを届ける');b.onclick=()=>{if(!st[0][3])openZukan();else if(!st[1][3]){const [y,m]=jstMonth();const od=ODAI_M[m];openWrite({kind:od[1],a:'【今月のお題】'+od[0]+'\n',first:1})}else openZukan()};W.append(b)}
+ X.append(W)}
 $('sgb').onclick=()=>openWrite();myStones();
 $('rf-one').onclick=()=>{const lab=$('rf-p').value;openWrite({who:lab?((SHORT[lab]||['',lab])[1]):'',a:$('rf-say').value.trim()?'「'+$('rf-say').value.trim()+'」と言われた':'',c:[$('rf-move').value.trim(),$('rf-next').value.trim()&&('次：'+$('rf-next').value.trim())].filter(Boolean).join('。')})};
 // 事務局（オーナー）だけに見える受信箱
@@ -1055,7 +1080,7 @@ function eveCard(lab){view('eve');setTimeout(()=>prep(lab),50)}
 function prepNos(lab){const c=CARDS[lab]||{};const s=new Set(c.read||[]);for(const j of J)if((j.persona||[]).includes(lab))s.add(j.no);return [...s].filter(n=>BY[n])}
 function prepSub(id,lab){const n=prepNos(lab).length;return '📖 物語　🗂 仲間の例話 '+n+'本'}
 function exRow(no){const j=BY[no];const b=el('button','ex');const nm=(j.author||'').replace(/さん.*$/,'')||'3C';b.append(el('span','av gu exa',nm.slice(0,1)));const t=el('span','t');
- t.append(el('small','who2','例話 '+no+'｜'+(j.author||'')));t.append(el('b',null,j.title.replace(/^「|」$/g,'')));if(j.desc)t.append(el('small',null,j.desc));b.append(t);b.append(el('span','go','›'));b.onclick=()=>openJ(no);return b}
+ t.append(el('small','who2','例話 '+no+'｜'+(j.author||'')+(goodCount(no)?'　💡'+goodCount(no):'')));t.append(el('b',null,j.title.replace(/^「|」$/g,'')));if(j.desc)t.append(el('small',null,j.desc));b.append(t);b.append(el('span','go','›'));b.onclick=()=>openJ(no);return b}
 function prep(lab,c_,s_){const C=$('evec');C.textContent='';const c=CARDS[lab];if(!c)return;const id=c.id;const s=STORY[id];const nos=prepNos(lab);
  const H=el('div','prh');H.append(el('div','prk',(c_&&s_)?c_.ic+' '+c_.c+'｜'+s_.t:'こんなお客様の予習'));H.append(el('b',null,'「'+(s_?s_.q:(PQ[id]?PQ[id][0]:lab))+'」'));H.append(el('small',null,lab));
  const J3=el('div','prj');const mk=(ic,t,s_,tg)=>{const b=el('button');b.append(el('span','ic',ic));b.append(el('b',null,t));b.append(el('small',null,s_));b.onclick=()=>tg&&tg.scrollIntoView({behavior:'smooth',block:'start'});J3.append(b);return b};
